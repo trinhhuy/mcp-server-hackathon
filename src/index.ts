@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { createMcpServer } from './server.js';
 import { startHttpTransport } from './transport/http.js';
+import { startStdioTransport } from './transport/stdio.js';
 import { logger } from './logger.js';
 /**
  * Start the Unleash MCP Server
@@ -11,8 +12,9 @@ async function main() {
     const server = createMcpServer();
 
     // Start with appropriate transport
-    await startHttpTransport(server);
-    
+    // await startHttpTransport(server);
+    await startStdioTransport(server);
+
     logger.log('Unleash MCP Server started successfully');
     
     // Handle graceful shutdown

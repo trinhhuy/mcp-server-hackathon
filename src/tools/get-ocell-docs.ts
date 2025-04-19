@@ -26,29 +26,26 @@ export async function handleGetDoc({ message }: { message?: string }) {
         isError: true
       };
     }
-    // xu ly result 1 chut content
-    let tempChoices: any[] = []
-    let choices = result.choices;
-    choices.forEach((choice: { index: number, finish_reason: any, message: { content: string, role: string } }) => {
-      let temp = {...choice}
-      const content = choice.message.content;
-      // Tìm phần văn bản sau dấu ``` cuối cùng
-      const lastCodeBlockIndex = content.lastIndexOf('```');
-      if (lastCodeBlockIndex !== -1) {
-        temp.message.content = content.substring(lastCodeBlockIndex + 3).trim();
-      }
-      tempChoices.push(temp)
-    });
+    // // xu ly result 1 chut content
+    // let tempChoices: any[] = []
+    // let choices = result.choices;
+    // choices.forEach((choice: { index: number, finish_reason: any, message: { content: string, role: string } }) => {
+    //   let temp = {...choice}
+    //   const content = choice.message.content;
+    //   // Tìm phần văn bản sau dấu ``` cuối cùng
+    //   const lastCodeBlockIndex = content.lastIndexOf('```');
+    //   if (lastCodeBlockIndex !== -1) {
+    //     temp.message.content = content.substring(lastCodeBlockIndex + 3).trim();
+    //   }
+    //   tempChoices.push(temp)
+    // });
     
     return {
       content: [{
         type: "text",
         text: JSON.stringify({
           success: true,
-          result: {
-            ...result,
-            choices: tempChoices
-          }
+          result
         }, null, 2)
       }]
     };

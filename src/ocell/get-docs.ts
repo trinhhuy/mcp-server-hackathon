@@ -25,8 +25,8 @@ export async function getDocs(
       data: {
         messages: message,
         model: 'Qwen/Qwen2.5-Coder-32B-Instruct',
-        // chat_mode: 'chat_knowledge',
-        // chat_param: 'Ocell_Docs'
+        chat_mode: 'chat_knowledge',
+        // chat_param: 'Ocell_Test'
       }
     });
     
