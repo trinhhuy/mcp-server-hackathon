@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { logger } from '../logger.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 /**
  * Add a tag to a feature
@@ -14,19 +17,18 @@ export async function getDocs(
   try {
     const response = await axios({
       method: 'POST',
-      url: 'http://localhost:5670/api/v2/chat/completions',
+      url: `${process.env.OCELL_BASE_URL}/api/v2/chat/completions`,
       headers: {
-        // 'Authorization': 'Beare 3Rfyuk48FtKEyU3xkYtfvqBBfxYMz',
-        'Authorization': 'Beare sk-rsgsccrkwmgqijtqpmgmbtcmdrabhjbnltwquvlztzwaiktn',
+        'Authorization': `Beare ${process.env.OCELL_API_KEY}`,
         'accept': 'application/json',
         'Content-Type': 'application/json',
         'Cookie': 'frontend_lang=vi_VN'
       },
       data: {
         messages: message,
-        model: 'Qwen/Qwen2.5-Coder-32B-Instruct',
-        chat_mode: 'chat_knowledge',
-        // chat_param: 'Ocell_Test'
+        model: process.env.OCELL_MODEL,
+        chat_mode: process.env.OCELL_CHAT_MODE,
+        chat_param: process.env.OCELL_CHAT_PARAM
       }
     });
     
