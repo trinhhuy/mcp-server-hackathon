@@ -12,8 +12,8 @@ async function main() {
     const server = createMcpServer();
 
     // Start with appropriate transport
-    // await startHttpTransport(server);
-    await startStdioTransport(server);
+    await startHttpTransport(server);
+    //await startStdioTransport(server);
 
     logger.log('Unleash MCP Server started successfully');
     
